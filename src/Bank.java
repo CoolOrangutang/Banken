@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +43,6 @@ public class Bank {
                     Menu();
                 }
 
-
                 switch(choice){
                     case 1:
                         createCustomer();
@@ -68,7 +66,7 @@ public class Bank {
             } catch (Exception e) {
                 System.out.println("Please pick a valid option.");
                 try {
-                    Thread.sleep(800);
+                    Thread.sleep(2000);
                 } catch (Exception u) {}
                 Menu();
             }
@@ -82,16 +80,14 @@ public class Bank {
 
     //Denna metod används för att skapa användarens bankkonto och sparar den.
      void createCustomer(){
-
          try {
-
              Scanner inputScanner = new Scanner(System.in);
              System.out.println("Name:");
-
              String newName = inputScanner.nextLine();
-             System.out.println("Personnummer:");
 
+             System.out.println("Personnummer:");
              int newPersonNum = inputScanner.nextInt();
+
              Customer nyCustomer = new Customer(newName, newPersonNum);
 
              kunder.add(nyCustomer);
@@ -104,16 +100,16 @@ public class Bank {
          }
 
         try {
-            Thread.sleep(800);
+            Thread.sleep(2000);
         } catch (Exception e) {}
         Menu();
     }
     //Skapar en avändare för banken.
      void createAccount(){
 
-        if(konton.size() < 0){
+        if(konton.size() == 0){
             System.out.println("Sorry, du måste göra ett registrera dig innan du gör ett konto!");
-            try {Thread.sleep(5000);} catch
+            try {Thread.sleep(2000);} catch
             (InterruptedException e) {throw new RuntimeException(e);}
             Menu();
         }
@@ -132,8 +128,10 @@ public class Bank {
 
              System.out.println("Saldo:");
              int newSaldo = inputScanner.nextInt();
-             Account nyAccount = new Account(ägare, newSaldo);
-             ägare.setAccount(nyAccount);
+             int id = konton.size() + 1;
+             Account nyAccount = new Account(ägare, newSaldo, id);
+
+             ägare.addAccount(nyAccount); //fix
              konton.add(nyAccount);
 
              System.out.println("Namn:" + ägare);
@@ -144,10 +142,8 @@ public class Bank {
          }
 
 
-
-
         try {
-            Thread.sleep(800);
+            Thread.sleep(2000);
         } catch (Exception e) {}
         Menu();
     }
@@ -180,82 +176,99 @@ public class Bank {
 
          try {
              Scanner inputScanner = new Scanner(System.in);
+
              System.out.println("Sök efter konto:");
              String searchName = inputScanner.nextLine();
+
              Customer ägare = findCustomer(searchName);
              if (ägare == null) {
                  System.out.println("Användar namnet som du söker har inget konto.");
 
-                 try {Thread.sleep(800);} catch
+                 try {Thread.sleep(2000);} catch
                  (InterruptedException e) {throw new RuntimeException(e);}
-
              }
-             System.out.println(ägare.getAccount().toStringAccount());
+             ägare.printAccountsInfo();
+
          } catch (Exception e) {}
          Menu();
     };
+
 
     void changeBalance(){
 
         try {
             Scanner inputScanner = new Scanner(System.in);
 
-            System.out.println("Sök efter konto:");
+            System.out.println("Sök efter Användare:");
             String searchName = inputScanner.nextLine();
-
             Customer ägare = findCustomer(searchName);
             if (ägare == null) {
                 System.out.println("Användar namnet som du söker har inget konto.");
             }
-            System.out.println(ägare.getAccount().toStringAccount());
-            System.out.println("Hur mycket vill du lägga till?");
+            System.out.println(ägare.getAccounts());
+
+
+
+
+            /*
             int adderadePengar = inputScanner.nextInt();
 
-            Account konto = ägare.getAccount();
+            ArrayList<Account> konton = ägare.getAccounts();
+            Account konton;
 
-            int nutidaSaldo = konto.getSaldo();
+            int nutidaSaldo = ägare.getAccounts().getSaldo();
             int totalaSaldo = adderadePengar + nutidaSaldo;
 
-            konto.setSaldo(totalaSaldo);
-            System.out.println(konto.getSaldo());
+            konton.setSaldo(totalaSaldo);
+            System.out.println(konton.getSaldo());
+
+
             try {
-                Thread.sleep(8000);
+                Thread.sleep(2000);
             } catch (Exception e) {}
             Menu();
-        } catch (Exception e) {
+             */
 
+        } catch (Exception e) {
             System.out.println("Det gick inte försök igen!");
-            try {Thread.sleep(800);} catch
+            try {Thread.sleep(2000);} catch
             (InterruptedException b) {throw new RuntimeException(e);}
             changeBalance();
-
         }
     };
+
 
     void printCustomers(){
         int index = 1;
         for (Customer customer : kunder) {
-            System.out.println( index + " : " + customer.toStringCustomer());
+            System.out.println( index + " : " + customer);
             index++;
 
-            Scanner inputScanner = new Scanner(System.in);
-            
-            try{
-
-                int choice = inputScanner.nextInt();
-
-            }catch (Exception e){
-
-                System.out.println("Please pick a valid option.");
-
-                try {
-                    Thread.sleep(800);
-                } catch (Exception u) {}
-                printCustomers();
-            }
-            Menu();
         }
+        try {Thread.sleep(2000);} catch
+        (InterruptedException e) {throw new RuntimeException(e);}
+
+        Menu();
     };
+
+    void findIdAccount(){
+
+        int id = Account.getId();
+        Scanner inputScanner = new Scanner(System.in);
+
+        System.out.println("Sök efter Användare:");
+        String searchName = inputScanner.nextLine();
+        Customer ägare = findCustomer(searchName);
+        if (ägare == null) {
+            System.out.println("Användar namnet som du söker har inget konto.");
+        }
+
+        System.out.println(ägare.getAccounts());
+
+
+
+
+    }
 }
 
 

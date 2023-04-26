@@ -1,30 +1,39 @@
-public class Customer extends Bank {
+import java.util.ArrayList;
+
+public class Customer{
 
     String name;
     int personnummer;
-    private Account account;
+    private ArrayList<Account> accounts;
 
     public Customer(String newName, int newPersonNum){
         name = newName;
         personnummer = newPersonNum;
-        account = new Account(this, 0);
+        accounts = new ArrayList<>();
     };
 
     public String getName(){
         return this.name;
     };
 
-    public Account getAccount(){
-        return this.account;
+    public ArrayList<Account> getAccounts(){
+        return this.accounts;
     };
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void addAccount(Account account) {
+        accounts.add(account);
     }
 
-    public String toStringCustomer(){
-        return name + " " + personnummer;
+    public void printAccountsInfo() {
+        int i = 0;
+        for (Account account : accounts) {
+            i++;
+            System.out.println( i + "." + account);
+        }
+    }
+
+    @Override
+    public String toString(){
+        return name + " ; " + "Personnummer:" + personnummer;
     };
-
-
 }
