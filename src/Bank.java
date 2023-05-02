@@ -6,7 +6,7 @@ public class Bank {
     Customer hittadeKunden;
 
     Customer getCustomer(String name) {
-        //Hitta kunden med namnet name
+        //Hitta kunden med namnet som du skriver in.
         return hittadeKunden;
     }
 
@@ -104,10 +104,10 @@ public class Bank {
         } catch (Exception e) {}
         Menu();
     }
-    //Skapar en avändare för banken.
+    //Skapar en användare för banken.
      void createAccount(){
 
-        if(konton.size() == 0){
+        if(kunder.size() == 0){
             System.out.println("Sorry, du måste göra ett registrera dig innan du gör ett konto!");
             try {Thread.sleep(2000);} catch
             (InterruptedException e) {throw new RuntimeException(e);}
@@ -128,8 +128,8 @@ public class Bank {
 
              System.out.println("Saldo:");
              int newSaldo = inputScanner.nextInt();
-             int id = konton.size() + 1;
-             Account nyAccount = new Account(ägare, newSaldo, id);
+             int newId = konton.size() + 1;
+             Account nyAccount = new Account(ägare, newSaldo, newId);
 
              ägare.addAccount(nyAccount); //fix
              konton.add(nyAccount);
@@ -173,7 +173,6 @@ public class Bank {
      };
 
      void searchingAcc(){
-
          try {
              Scanner inputScanner = new Scanner(System.in);
 
@@ -188,6 +187,7 @@ public class Bank {
                  (InterruptedException e) {throw new RuntimeException(e);}
              }
              ägare.printAccountsInfo();
+
 
          } catch (Exception e) {}
          Menu();
@@ -206,8 +206,6 @@ public class Bank {
                 System.out.println("Användar namnet som du söker har inget konto.");
             }
             System.out.println(ägare.getAccounts());
-
-
 
 
             /*
@@ -252,8 +250,6 @@ public class Bank {
     };
 
     void findIdAccount(){
-
-        int id = Account.getId();
         Scanner inputScanner = new Scanner(System.in);
 
         System.out.println("Sök efter Användare:");
@@ -264,9 +260,6 @@ public class Bank {
         }
 
         System.out.println(ägare.getAccounts());
-
-
-
 
     }
 }

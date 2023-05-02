@@ -2,7 +2,7 @@ public class Account{
 
     Customer ägare;
     int saldo;
-    static int id;
+    int id;
 
     public Account(Customer newÄgare, int newSaldo, int newId){
         ägare = newÄgare;
@@ -18,12 +18,12 @@ public class Account{
         return saldo;
     };
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
-    public static void setId(int id) {
-        Account.id = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setSaldo(int nySaldo){
@@ -32,7 +32,7 @@ public class Account{
 
     @Override
     public String toString() {
-        return "Pengar: " + saldo + "; Ägare " + ägare;
+        return "ID: " + id + "; Pengar: " + saldo + "; Ägare " + ägare;
     }
 }
 

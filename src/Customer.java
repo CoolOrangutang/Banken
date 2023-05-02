@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Customer{
 
@@ -25,11 +26,12 @@ public class Customer{
     }
 
     public void printAccountsInfo() {
-        int i = 0;
+        System.out.println("Hittade dessa konton kopplade till bitchen '" + this.name + "': ");
         for (Account account : accounts) {
-            i++;
-            System.out.println( i + "." + account);
+            System.out.println(account);
         }
+        Scanner s = new Scanner(System.in);
+        s.nextLine();
     }
 
     @Override
